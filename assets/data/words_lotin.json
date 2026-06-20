@@ -2,61 +2,2114 @@
   {
     "id": 1,
     "level": 1,
-    "letters": ["O", "T", "A", "K"],
-    "words": ["OT", "AT", "TA", "OTA", "TOK", "KOT", "OTAK", "TAKO"]
+    "letters": [
+      "L",
+      "O",
+      "Y",
+      "Q",
+      "A"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "AQL",
+      "YOL",
+      "QOL",
+      "LOY",
+      "QOY",
+      "YOQ",
+      "QOYA"
+    ]
   },
   {
     "id": 2,
     "level": 2,
-    "letters": ["S", "U", "V", "R", "A"],
-    "words": ["SUV", "RAS", "VAR", "ASR", "SUVAR", "URSA"]
+    "letters": [
+      "Q",
+      "U",
+      "Y",
+      "O",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "ON",
+      "UN",
+      "UY",
+      "QOY",
+      "YOQ",
+      "QON",
+      "QUYON"
+    ]
   },
   {
     "id": 3,
     "level": 3,
-    "letters": ["K", "I", "T", "O", "B"],
-    "words": ["KIT", "TOK", "BOT", "TOB", "KITOB", "BOTIK"]
+    "letters": [
+      "O",
+      "L",
+      "T",
+      "I",
+      "N"
+    ],
+    "words": [
+      "IT",
+      "ON",
+      "OT",
+      "NOL",
+      "TIL",
+      "OLTI",
+      "ILON",
+      "OLTIN"
+    ]
   },
   {
     "id": 4,
     "level": 4,
-    "letters": ["M", "A", "K", "T", "B"],
-    "words": ["MAK", "TAK", "KAT", "MAKT", "MAKTAB"]
+    "letters": [
+      "S",
+      "A",
+      "R",
+      "I",
+      "Q"
+    ],
+    "words": [
+      "ARI",
+      "QIR",
+      "RAQS",
+      "QARI",
+      "ARIQ",
+      "RAIS",
+      "SARIQ"
+    ]
   },
   {
     "id": 5,
     "level": 5,
-    "letters": ["G", "U", "L", "I", "B"],
-    "words": ["GUL", "BIL", "GUL", "LIBOG", "GULBI"]
+    "letters": [
+      "Q",
+      "U",
+      "L",
+      "O",
+      "N"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "UN",
+      "QOL",
+      "NOL",
+      "QON",
+      "QULON"
+    ]
   },
   {
     "id": 6,
     "level": 6,
-    "letters": ["D", "A", "R", "Y", "O"],
-    "words": ["DAR", "YOR", "ORDA", "DARYO", "ROYDA"]
+    "letters": [
+      "Q",
+      "O",
+      "R",
+      "I",
+      "N"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "QOR",
+      "QIR",
+      "QON",
+      "QORIN"
+    ]
   },
   {
     "id": 7,
     "level": 7,
-    "letters": ["B", "A", "H", "O", "R"],
-    "words": ["BOR", "BAHOR", "ROBA", "HOR", "ORBA"]
+    "letters": [
+      "Q",
+      "O",
+      "N",
+      "U",
+      "N"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "UN",
+      "NON",
+      "QON",
+      "QONUN"
+    ]
   },
   {
     "id": 8,
     "level": 8,
-    "letters": ["Y", "I", "L", "D", "Z"],
-    "words": ["YIL", "DIL", "YILDIZ", "LIZ"]
+    "letters": [
+      "B",
+      "O",
+      "Y",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "QOY",
+      "YOQ",
+      "OYOQ",
+      "BOYOQ"
+    ]
   },
   {
     "id": 9,
     "level": 9,
-    "letters": ["Q", "A", "L", "A", "M"],
-    "words": ["QAL", "LAM", "MAL", "QALAM", "AMAL"]
+    "letters": [
+      "Y",
+      "O",
+      "Z",
+      "G",
+      "I"
+    ],
+    "words": [
+      "OY",
+      "YOG",
+      "YOZ",
+      "GOZ",
+      "OGIZ",
+      "YOZGI"
+    ]
   },
   {
     "id": 10,
     "level": 10,
-    "letters": ["O", "L", "M", "A", "S"],
-    "words": ["OLMA", "SOLA", "MOL", "SOL", "OLMAS", "SALOM"]
+    "letters": [
+      "S",
+      "A",
+      "L",
+      "O",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "SON",
+      "NOL",
+      "ONA",
+      "SALON"
+    ]
+  },
+  {
+    "id": 11,
+    "level": 11,
+    "letters": [
+      "G",
+      "O",
+      "S",
+      "H",
+      "T"
+    ],
+    "words": [
+      "OT",
+      "OSH",
+      "TOG",
+      "TOSH",
+      "GOSHT"
+    ]
+  },
+  {
+    "id": 12,
+    "level": 12,
+    "letters": [
+      "Y",
+      "O",
+      "R",
+      "U",
+      "G"
+    ],
+    "words": [
+      "OY",
+      "UY",
+      "GOR",
+      "YOG",
+      "YORUG"
+    ]
+  },
+  {
+    "id": 13,
+    "level": 13,
+    "letters": [
+      "L",
+      "I",
+      "M",
+      "O",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "NOL",
+      "OLIM",
+      "ILON",
+      "LIMON"
+    ]
+  },
+  {
+    "id": 14,
+    "level": 14,
+    "letters": [
+      "K",
+      "O",
+      "N",
+      "D",
+      "A"
+    ],
+    "words": [
+      "ON",
+      "ONA",
+      "KOD",
+      "NOK",
+      "KONDA"
+    ]
+  },
+  {
+    "id": 15,
+    "level": 15,
+    "letters": [
+      "B",
+      "O",
+      "Y",
+      "I",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "BINO",
+      "OYIN",
+      "BOYIN"
+    ]
+  },
+  {
+    "id": 16,
+    "level": 16,
+    "letters": [
+      "Q",
+      "O",
+      "V",
+      "U",
+      "N"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "UN",
+      "QON",
+      "QOVUN"
+    ]
+  },
+  {
+    "id": 17,
+    "level": 17,
+    "letters": [
+      "S",
+      "O",
+      "V",
+      "U",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "UN",
+      "SUV",
+      "SON",
+      "SOVUN"
+    ]
+  },
+  {
+    "id": 18,
+    "level": 18,
+    "letters": [
+      "K",
+      "O",
+      "N",
+      "K",
+      "I"
+    ],
+    "words": [
+      "ON",
+      "KOK",
+      "NOK",
+      "KINO",
+      "KONKI"
+    ]
+  },
+  {
+    "id": 19,
+    "level": 19,
+    "letters": [
+      "T",
+      "A",
+      "R",
+      "M",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "OT",
+      "TOM",
+      "OTA",
+      "QOR",
+      "TOR",
+      "QORA",
+      "TAOM",
+      "TARMOQ"
+    ]
+  },
+  {
+    "id": 20,
+    "level": 20,
+    "letters": [
+      "Q",
+      "U",
+      "Y",
+      "O",
+      "S",
+      "H"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "UY",
+      "QOY",
+      "YOQ",
+      "OSH",
+      "YOSH",
+      "QUSH",
+      "QUYOSH"
+    ]
+  },
+  {
+    "id": 21,
+    "level": 21,
+    "letters": [
+      "T",
+      "I",
+      "R",
+      "N",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "IT",
+      "ON",
+      "OT",
+      "QOR",
+      "TOR",
+      "QIR",
+      "QON",
+      "QORIN"
+    ]
+  },
+  {
+    "id": 22,
+    "level": 22,
+    "letters": [
+      "Q",
+      "O",
+      "S",
+      "H",
+      "N",
+      "I"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "ISH",
+      "SON",
+      "OSH",
+      "QON",
+      "QISH",
+      "QOSHNI"
+    ]
+  },
+  {
+    "id": 23,
+    "level": 23,
+    "letters": [
+      "M",
+      "A",
+      "Y",
+      "D",
+      "O",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "DAM",
+      "ONA",
+      "OYNA",
+      "MODA",
+      "ODAM",
+      "MAYDON"
+    ]
+  },
+  {
+    "id": 24,
+    "level": 24,
+    "letters": [
+      "M",
+      "O",
+      "L",
+      "I",
+      "Y",
+      "A"
+    ],
+    "words": [
+      "OY",
+      "YOL",
+      "LOY",
+      "YIL",
+      "OLIM",
+      "OILA",
+      "OLMA",
+      "MOLIYA"
+    ]
+  },
+  {
+    "id": 25,
+    "level": 25,
+    "letters": [
+      "Y",
+      "A",
+      "P",
+      "R",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "QOY",
+      "QOR",
+      "YOQ",
+      "QOYA",
+      "QORA",
+      "YAPROQ"
+    ]
+  },
+  {
+    "id": 26,
+    "level": 26,
+    "letters": [
+      "S",
+      "H",
+      "A",
+      "M",
+      "O",
+      "L"
+    ],
+    "words": [
+      "HA",
+      "OSH",
+      "OLMA",
+      "SHOL",
+      "MAOSH",
+      "SALOM",
+      "SHAMOL"
+    ]
+  },
+  {
+    "id": 27,
+    "level": 27,
+    "letters": [
+      "R",
+      "O",
+      "Y",
+      "X",
+      "A",
+      "T"
+    ],
+    "words": [
+      "OY",
+      "OT",
+      "TOY",
+      "OTA",
+      "TOR",
+      "XAYR",
+      "ROYXAT"
+    ]
+  },
+  {
+    "id": 28,
+    "level": 28,
+    "letters": [
+      "T",
+      "A",
+      "R",
+      "O",
+      "Z",
+      "I"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "OTA",
+      "TOR",
+      "ARI",
+      "AZO",
+      "TAROZI"
+    ]
+  },
+  {
+    "id": 29,
+    "level": 29,
+    "letters": [
+      "L",
+      "O",
+      "Y",
+      "I",
+      "H",
+      "A"
+    ],
+    "words": [
+      "OY",
+      "HA",
+      "YOL",
+      "LOY",
+      "YIL",
+      "OILA",
+      "LOYIHA"
+    ]
+  },
+  {
+    "id": 30,
+    "level": 30,
+    "letters": [
+      "X",
+      "O",
+      "T",
+      "I",
+      "R",
+      "A"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "OTA",
+      "TOR",
+      "ARI",
+      "TARIX",
+      "XOTIRA"
+    ]
+  },
+  {
+    "id": 31,
+    "level": 31,
+    "letters": [
+      "Y",
+      "O",
+      "L",
+      "G",
+      "O",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "YOG",
+      "YOL",
+      "LOY",
+      "NOL",
+      "YOLGON"
+    ]
+  },
+  {
+    "id": 32,
+    "level": 32,
+    "letters": [
+      "Q",
+      "A",
+      "Y",
+      "M",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "QOY",
+      "YOQ",
+      "QOYA",
+      "QAYMOQ"
+    ]
+  },
+  {
+    "id": 33,
+    "level": 33,
+    "letters": [
+      "K",
+      "O",
+      "Y",
+      "L",
+      "A",
+      "K"
+    ],
+    "words": [
+      "OY",
+      "KOK",
+      "YOL",
+      "LOY",
+      "KOL",
+      "KOYLAK"
+    ]
+  },
+  {
+    "id": 34,
+    "level": 34,
+    "letters": [
+      "F",
+      "O",
+      "N",
+      "T",
+      "A",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "OT",
+      "NON",
+      "ONA",
+      "OTA",
+      "FONTAN"
+    ]
+  },
+  {
+    "id": 35,
+    "level": 35,
+    "letters": [
+      "I",
+      "M",
+      "P",
+      "O",
+      "R",
+      "T"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "TOM",
+      "TOP",
+      "TOR",
+      "IMPORT"
+    ]
+  },
+  {
+    "id": 36,
+    "level": 36,
+    "letters": [
+      "S",
+      "L",
+      "O",
+      "G",
+      "A",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "SON",
+      "NOL",
+      "ONA",
+      "SALON",
+      "SLOGAN"
+    ]
+  },
+  {
+    "id": 37,
+    "level": 37,
+    "letters": [
+      "B",
+      "O",
+      "L",
+      "I",
+      "S",
+      "H"
+    ],
+    "words": [
+      "ISH",
+      "OSH",
+      "BOSH",
+      "SHOL",
+      "HOSIL",
+      "BOLISH"
+    ]
+  },
+  {
+    "id": 38,
+    "level": 38,
+    "letters": [
+      "Y",
+      "O",
+      "R",
+      "D",
+      "A",
+      "M"
+    ],
+    "words": [
+      "OY",
+      "DAM",
+      "MODA",
+      "ODAM",
+      "DARYO",
+      "YORDAM"
+    ]
+  },
+  {
+    "id": 39,
+    "level": 39,
+    "letters": [
+      "S",
+      "O",
+      "C",
+      "H",
+      "I",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "ISH",
+      "OSH",
+      "SOCH",
+      "QISH",
+      "SOCHIQ"
+    ]
+  },
+  {
+    "id": 40,
+    "level": 40,
+    "letters": [
+      "T",
+      "U",
+      "P",
+      "R",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "OT",
+      "TOP",
+      "QOR",
+      "TOR",
+      "TUPROQ"
+    ]
+  },
+  {
+    "id": 41,
+    "level": 41,
+    "letters": [
+      "P",
+      "A",
+      "Y",
+      "P",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "QOY",
+      "YOQ",
+      "QOYA",
+      "PAYPOQ"
+    ]
+  },
+  {
+    "id": 42,
+    "level": 42,
+    "letters": [
+      "H",
+      "A",
+      "Y",
+      "V",
+      "O",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "HA",
+      "ONA",
+      "OYNA",
+      "HAYVON"
+    ]
+  },
+  {
+    "id": 43,
+    "level": 43,
+    "letters": [
+      "Y",
+      "O",
+      "N",
+      "G",
+      "I",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "YOG",
+      "NON",
+      "OYIN",
+      "YONGIN"
+    ]
+  },
+  {
+    "id": 44,
+    "level": 44,
+    "letters": [
+      "T",
+      "E",
+      "Z",
+      "R",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "OT",
+      "QOR",
+      "TOR",
+      "TEZROQ"
+    ]
+  },
+  {
+    "id": 45,
+    "level": 45,
+    "letters": [
+      "T",
+      "A",
+      "H",
+      "L",
+      "I",
+      "L"
+    ],
+    "words": [
+      "IT",
+      "HA",
+      "TIL",
+      "TILLA",
+      "TAHLIL"
+    ]
+  },
+  {
+    "id": 46,
+    "level": 46,
+    "letters": [
+      "G",
+      "U",
+      "L",
+      "Z",
+      "O",
+      "R"
+    ],
+    "words": [
+      "GUL",
+      "GOR",
+      "GOZ",
+      "RUL",
+      "GULZOR"
+    ]
+  },
+  {
+    "id": 47,
+    "level": 47,
+    "letters": [
+      "Q",
+      "O",
+      "S",
+      "H",
+      "I",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "ISH",
+      "OSH",
+      "QISH",
+      "QOSHIQ"
+    ]
+  },
+  {
+    "id": 48,
+    "level": 48,
+    "letters": [
+      "Q",
+      "U",
+      "R",
+      "I",
+      "S",
+      "H"
+    ],
+    "words": [
+      "ISH",
+      "QIR",
+      "QISH",
+      "QUSH",
+      "QURISH"
+    ]
+  },
+  {
+    "id": 49,
+    "level": 49,
+    "letters": [
+      "T",
+      "O",
+      "K",
+      "Z",
+      "O",
+      "R"
+    ],
+    "words": [
+      "OT",
+      "KOZ",
+      "TOK",
+      "TOR",
+      "TOKZOR"
+    ]
+  },
+  {
+    "id": 50,
+    "level": 50,
+    "letters": [
+      "L",
+      "A",
+      "G",
+      "M",
+      "O",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "NOL",
+      "ONA",
+      "OLMA",
+      "LAGMON"
+    ]
+  },
+  {
+    "id": 51,
+    "level": 51,
+    "letters": [
+      "O",
+      "S",
+      "H",
+      "P",
+      "A",
+      "Z"
+    ],
+    "words": [
+      "HA",
+      "SOZ",
+      "OSH",
+      "AZO",
+      "OSHPAZ"
+    ]
+  },
+  {
+    "id": 52,
+    "level": 52,
+    "letters": [
+      "D",
+      "O",
+      "K",
+      "T",
+      "O",
+      "R"
+    ],
+    "words": [
+      "OT",
+      "TOK",
+      "TOR",
+      "KOD",
+      "DOKTOR"
+    ]
+  },
+  {
+    "id": 53,
+    "level": 53,
+    "letters": [
+      "D",
+      "A",
+      "S",
+      "T",
+      "U",
+      "R"
+    ],
+    "words": [
+      "SUT",
+      "USTA",
+      "DARS",
+      "RUDA",
+      "DASTUR"
+    ]
+  },
+  {
+    "id": 54,
+    "level": 54,
+    "letters": [
+      "P",
+      "O",
+      "C",
+      "H",
+      "T",
+      "A"
+    ],
+    "words": [
+      "OT",
+      "HA",
+      "TOP",
+      "OTA",
+      "POCHTA"
+    ]
+  },
+  {
+    "id": 55,
+    "level": 55,
+    "letters": [
+      "Y",
+      "O",
+      "M",
+      "G",
+      "I",
+      "R"
+    ],
+    "words": [
+      "OY",
+      "GOR",
+      "YOG",
+      "OGIR",
+      "YOMGIR"
+    ]
+  },
+  {
+    "id": 56,
+    "level": 56,
+    "letters": [
+      "S",
+      "H",
+      "O",
+      "R",
+      "V",
+      "A"
+    ],
+    "words": [
+      "HA",
+      "OSH",
+      "SHOR",
+      "SHAR",
+      "SHORVA"
+    ]
+  },
+  {
+    "id": 57,
+    "level": 57,
+    "letters": [
+      "T",
+      "O",
+      "R",
+      "M",
+      "O",
+      "Z"
+    ],
+    "words": [
+      "OT",
+      "TOM",
+      "TOR",
+      "MOTOR",
+      "TORMOZ"
+    ]
+  },
+  {
+    "id": 58,
+    "level": 58,
+    "letters": [
+      "T",
+      "U",
+      "S",
+      "H",
+      "L",
+      "I",
+      "K"
+    ],
+    "words": [
+      "IT",
+      "ISH",
+      "SUT",
+      "TIL",
+      "KUL",
+      "TUSH",
+      "TISH",
+      "STUL",
+      "TULKI"
+    ]
+  },
+  {
+    "id": 59,
+    "level": 59,
+    "letters": [
+      "T",
+      "O",
+      "Z",
+      "A",
+      "L",
+      "I",
+      "K"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "KOZ",
+      "TOK",
+      "TIL",
+      "OTA",
+      "KOL",
+      "AZO",
+      "OLTI"
+    ]
+  },
+  {
+    "id": 60,
+    "level": 60,
+    "letters": [
+      "Y",
+      "O",
+      "Q",
+      "I",
+      "L",
+      "G",
+      "I"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "YOG",
+      "YOL",
+      "QOL",
+      "LOY",
+      "QOY",
+      "YIL",
+      "YOQ"
+    ]
+  },
+  {
+    "id": 61,
+    "level": 61,
+    "letters": [
+      "S",
+      "A",
+      "Y",
+      "O",
+      "H",
+      "A",
+      "T"
+    ],
+    "words": [
+      "OY",
+      "OT",
+      "HA",
+      "TOY",
+      "OTA",
+      "OSH",
+      "TOSH",
+      "YOSH",
+      "SAYT"
+    ]
+  },
+  {
+    "id": 62,
+    "level": 62,
+    "letters": [
+      "Q",
+      "I",
+      "S",
+      "H",
+      "L",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "ISH",
+      "QOL",
+      "OSH",
+      "QISH",
+      "SHOL",
+      "SOLIQ",
+      "HOSIL",
+      "QOSHIQ"
+    ]
+  },
+  {
+    "id": 63,
+    "level": 63,
+    "letters": [
+      "K",
+      "O",
+      "S",
+      "T",
+      "Y",
+      "U",
+      "M"
+    ],
+    "words": [
+      "OY",
+      "OT",
+      "UY",
+      "TOY",
+      "TOM",
+      "TOK",
+      "YUK",
+      "SUT",
+      "KOSTYUM"
+    ]
+  },
+  {
+    "id": 64,
+    "level": 64,
+    "letters": [
+      "V",
+      "I",
+      "L",
+      "O",
+      "Y",
+      "A",
+      "T"
+    ],
+    "words": [
+      "OY",
+      "IT",
+      "OT",
+      "TOY",
+      "YOL",
+      "LOY",
+      "TIL",
+      "OTA",
+      "YIL"
+    ]
+  },
+  {
+    "id": 65,
+    "level": 65,
+    "letters": [
+      "S",
+      "H",
+      "I",
+      "R",
+      "K",
+      "A",
+      "T"
+    ],
+    "words": [
+      "IT",
+      "HA",
+      "ISH",
+      "ARI",
+      "SHAR",
+      "RAIS",
+      "TISH",
+      "TAKSI",
+      "SHIRKAT"
+    ]
+  },
+  {
+    "id": 66,
+    "level": 66,
+    "letters": [
+      "S",
+      "T",
+      "A",
+      "D",
+      "I",
+      "O",
+      "N"
+    ],
+    "words": [
+      "IT",
+      "ON",
+      "OT",
+      "SON",
+      "ONA",
+      "OTA",
+      "DOST",
+      "SOAT",
+      "STADION"
+    ]
+  },
+  {
+    "id": 67,
+    "level": 67,
+    "letters": [
+      "C",
+      "H",
+      "O",
+      "Y",
+      "N",
+      "A",
+      "K"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "HA",
+      "NOK",
+      "ONA",
+      "OYNA",
+      "CHOY",
+      "KOCHA",
+      "CHOYNAK"
+    ]
+  },
+  {
+    "id": 68,
+    "level": 68,
+    "letters": [
+      "S",
+      "I",
+      "C",
+      "H",
+      "Q",
+      "O",
+      "N"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "ISH",
+      "SON",
+      "OSH",
+      "QON",
+      "SOCH",
+      "QISH",
+      "SOCHIQ"
+    ]
+  },
+  {
+    "id": 69,
+    "level": 69,
+    "letters": [
+      "D",
+      "O",
+      "S",
+      "T",
+      "L",
+      "I",
+      "K"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "TOK",
+      "TIL",
+      "KOD",
+      "KOL",
+      "OLTI",
+      "DOST",
+      "STOL"
+    ]
+  },
+  {
+    "id": 70,
+    "level": 70,
+    "letters": [
+      "Y",
+      "O",
+      "N",
+      "I",
+      "L",
+      "G",
+      "I"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "YOG",
+      "YOL",
+      "LOY",
+      "NOL",
+      "YIL",
+      "OYIN",
+      "ILON"
+    ]
+  },
+  {
+    "id": 71,
+    "level": 71,
+    "letters": [
+      "P",
+      "I",
+      "S",
+      "H",
+      "L",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "ISH",
+      "QOL",
+      "OSH",
+      "QISH",
+      "SHOL",
+      "SOLIQ",
+      "HOSIL",
+      "PISHLOQ"
+    ]
+  },
+  {
+    "id": 72,
+    "level": 72,
+    "letters": [
+      "Y",
+      "U",
+      "M",
+      "S",
+      "H",
+      "O",
+      "Q"
+    ],
+    "words": [
+      "OY",
+      "OQ",
+      "UY",
+      "QUM",
+      "QOY",
+      "YOQ",
+      "OSH",
+      "YOSH",
+      "QUSH"
+    ]
+  },
+  {
+    "id": 73,
+    "level": 73,
+    "letters": [
+      "Q",
+      "O",
+      "R",
+      "O",
+      "N",
+      "G",
+      "I"
+    ],
+    "words": [
+      "OQ",
+      "ON",
+      "GOR",
+      "QOR",
+      "QIR",
+      "QON",
+      "OGIR",
+      "QORIN",
+      "QORONGI"
+    ]
+  },
+  {
+    "id": 74,
+    "level": 74,
+    "letters": [
+      "B",
+      "O",
+      "S",
+      "H",
+      "L",
+      "I",
+      "Q"
+    ],
+    "words": [
+      "OQ",
+      "ISH",
+      "QOL",
+      "OSH",
+      "BOSH",
+      "QISH",
+      "SHOL",
+      "SOLIQ",
+      "HOSIL"
+    ]
+  },
+  {
+    "id": 75,
+    "level": 75,
+    "letters": [
+      "I",
+      "L",
+      "T",
+      "I",
+      "M",
+      "O",
+      "S"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "TOM",
+      "MIS",
+      "TIL",
+      "SIM",
+      "OLIM",
+      "OLTI",
+      "STOL"
+    ]
+  },
+  {
+    "id": 76,
+    "level": 76,
+    "letters": [
+      "T",
+      "O",
+      "S",
+      "H",
+      "Q",
+      "I",
+      "N"
+    ],
+    "words": [
+      "OQ",
+      "IT",
+      "ON",
+      "OT",
+      "ISH",
+      "SON",
+      "OSH",
+      "QON",
+      "TOSH"
+    ]
+  },
+  {
+    "id": 77,
+    "level": 77,
+    "letters": [
+      "H",
+      "I",
+      "S",
+      "O",
+      "B",
+      "O",
+      "T"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "ISH",
+      "OSH",
+      "TOSH",
+      "BOSH",
+      "TISH",
+      "HISOBOT"
+    ]
+  },
+  {
+    "id": 78,
+    "level": 78,
+    "letters": [
+      "A",
+      "V",
+      "T",
+      "O",
+      "B",
+      "U",
+      "S"
+    ],
+    "words": [
+      "OT",
+      "SUV",
+      "SUT",
+      "OTA",
+      "USTA",
+      "SOAT",
+      "SOTUV",
+      "AVTOBUS"
+    ]
+  },
+  {
+    "id": 79,
+    "level": 79,
+    "letters": [
+      "M",
+      "O",
+      "N",
+      "I",
+      "T",
+      "O",
+      "R"
+    ],
+    "words": [
+      "IT",
+      "ON",
+      "OT",
+      "TOM",
+      "TOR",
+      "MOTOR",
+      "ORMON",
+      "MONITOR"
+    ]
+  },
+  {
+    "id": 80,
+    "level": 80,
+    "letters": [
+      "Q",
+      "U",
+      "R",
+      "I",
+      "L",
+      "M",
+      "A"
+    ],
+    "words": [
+      "AQL",
+      "QUM",
+      "ARI",
+      "QIR",
+      "RUL",
+      "QARI",
+      "ARIQ",
+      "QURILMA"
+    ]
+  },
+  {
+    "id": 81,
+    "level": 81,
+    "letters": [
+      "R",
+      "O",
+      "Z",
+      "E",
+      "T",
+      "K",
+      "A"
+    ],
+    "words": [
+      "OT",
+      "KOZ",
+      "TOK",
+      "OTA",
+      "TOR",
+      "AZO",
+      "ERTA",
+      "ROZETKA"
+    ]
+  },
+  {
+    "id": 82,
+    "level": 82,
+    "letters": [
+      "R",
+      "A",
+      "Q",
+      "O",
+      "B",
+      "A",
+      "T"
+    ],
+    "words": [
+      "OQ",
+      "OT",
+      "OTA",
+      "QOR",
+      "TOR",
+      "QORA",
+      "BAQA",
+      "RAQOBAT"
+    ]
+  },
+  {
+    "id": 83,
+    "level": 83,
+    "letters": [
+      "I",
+      "N",
+      "T",
+      "I",
+      "Z",
+      "O",
+      "M"
+    ],
+    "words": [
+      "IT",
+      "ON",
+      "OT",
+      "TOM",
+      "IMZO",
+      "TIZIM",
+      "INTIZOM"
+    ]
+  },
+  {
+    "id": 84,
+    "level": 84,
+    "letters": [
+      "A",
+      "Y",
+      "I",
+      "R",
+      "I",
+      "S",
+      "H"
+    ],
+    "words": [
+      "HA",
+      "ISH",
+      "ARI",
+      "SAYR",
+      "SHAR",
+      "RAIS",
+      "AYIRISH"
+    ]
+  },
+  {
+    "id": 85,
+    "level": 85,
+    "letters": [
+      "K",
+      "U",
+      "L",
+      "R",
+      "A",
+      "N",
+      "G"
+    ],
+    "words": [
+      "UN",
+      "GUL",
+      "KUL",
+      "KUN",
+      "RUL",
+      "RANG",
+      "KULRANG"
+    ]
+  },
+  {
+    "id": 86,
+    "level": 86,
+    "letters": [
+      "L",
+      "A",
+      "V",
+      "O",
+      "Z",
+      "I",
+      "M"
+    ],
+    "words": [
+      "AZO",
+      "OLIM",
+      "OILA",
+      "OLMA",
+      "IMZO",
+      "ILOVA",
+      "LAVOZIM"
+    ]
+  },
+  {
+    "id": 87,
+    "level": 87,
+    "letters": [
+      "M",
+      "U",
+      "H",
+      "O",
+      "S",
+      "I",
+      "B"
+    ],
+    "words": [
+      "ISH",
+      "MIS",
+      "OSH",
+      "SIM",
+      "SHIM",
+      "BOSH",
+      "MUHOSIB"
+    ]
+  },
+  {
+    "id": 88,
+    "level": 88,
+    "letters": [
+      "B",
+      "L",
+      "O",
+      "K",
+      "N",
+      "O",
+      "T"
+    ],
+    "words": [
+      "ON",
+      "OT",
+      "TOK",
+      "NOL",
+      "NOK",
+      "KOL",
+      "BLOKNOT"
+    ]
+  },
+  {
+    "id": 89,
+    "level": 89,
+    "letters": [
+      "M",
+      "A",
+      "S",
+      "H",
+      "I",
+      "N",
+      "A"
+    ],
+    "words": [
+      "HA",
+      "ISH",
+      "MIS",
+      "SIM",
+      "SHIM",
+      "SAHNA",
+      "MASHINA"
+    ]
+  },
+  {
+    "id": 90,
+    "level": 90,
+    "letters": [
+      "L",
+      "O",
+      "G",
+      "O",
+      "T",
+      "I",
+      "P"
+    ],
+    "words": [
+      "IT",
+      "OT",
+      "TOP",
+      "TIL",
+      "TOG",
+      "OLTI",
+      "LOGOTIP"
+    ]
+  },
+  {
+    "id": 91,
+    "level": 91,
+    "letters": [
+      "K",
+      "O",
+      "M",
+      "B",
+      "A",
+      "Y",
+      "N"
+    ],
+    "words": [
+      "OY",
+      "ON",
+      "ONA",
+      "NOK",
+      "OYNA",
+      "BANK",
+      "KOMBAYN"
+    ]
+  },
+  {
+    "id": 92,
+    "level": 92,
+    "letters": [
+      "S",
+      "E",
+      "M",
+      "I",
+      "N",
+      "A",
+      "R"
+    ],
+    "words": [
+      "MIS",
+      "ARI",
+      "SIM",
+      "RASM",
+      "RAIS",
+      "SEMINAR"
+    ]
+  },
+  {
+    "id": 93,
+    "level": 93,
+    "letters": [
+      "M",
+      "A",
+      "L",
+      "U",
+      "M",
+      "O",
+      "T"
+    ],
+    "words": [
+      "OT",
+      "TOM",
+      "OTA",
+      "TAOM",
+      "OLMA",
+      "MALUMOT"
+    ]
+  },
+  {
+    "id": 94,
+    "level": 94,
+    "letters": [
+      "S",
+      "T",
+      "U",
+      "D",
+      "I",
+      "Y",
+      "A"
+    ],
+    "words": [
+      "IT",
+      "UY",
+      "SUT",
+      "USTA",
+      "SAYT",
+      "STUDIYA"
+    ]
+  },
+  {
+    "id": 95,
+    "level": 95,
+    "letters": [
+      "P",
+      "L",
+      "A",
+      "S",
+      "T",
+      "I",
+      "K"
+    ],
+    "words": [
+      "IT",
+      "TIL",
+      "IPAK",
+      "PAST",
+      "TAKSI",
+      "PLASTIK"
+    ]
+  },
+  {
+    "id": 96,
+    "level": 96,
+    "letters": [
+      "T",
+      "A",
+      "S",
+      "H",
+      "I",
+      "S",
+      "H"
+    ],
+    "words": [
+      "IT",
+      "HA",
+      "ISH",
+      "TISH",
+      "SHISHA",
+      "TASHISH"
+    ]
+  },
+  {
+    "id": 97,
+    "level": 97,
+    "letters": [
+      "T",
+      "R",
+      "A",
+      "K",
+      "T",
+      "O",
+      "R"
+    ],
+    "words": [
+      "OT",
+      "TOK",
+      "OTA",
+      "TOR",
+      "TORT",
+      "TRAKTOR"
+    ]
+  },
+  {
+    "id": 98,
+    "level": 98,
+    "letters": [
+      "M",
+      "I",
+      "L",
+      "L",
+      "I",
+      "O",
+      "N"
+    ],
+    "words": [
+      "ON",
+      "NOL",
+      "OLIM",
+      "ILON",
+      "LIMON",
+      "MILLION"
+    ]
+  },
+  {
+    "id": 99,
+    "level": 99,
+    "letters": [
+      "Y",
+      "O",
+      "L",
+      "B",
+      "A",
+      "R",
+      "S"
+    ],
+    "words": [
+      "OY",
+      "YOL",
+      "LOY",
+      "SAYR",
+      "BOLA",
+      "YOLBARS"
+    ]
+  },
+  {
+    "id": 100,
+    "level": 100,
+    "letters": [
+      "E",
+      "K",
+      "I",
+      "N",
+      "Z",
+      "O",
+      "R"
+    ],
+    "words": [
+      "ON",
+      "KOZ",
+      "NOK",
+      "KINO",
+      "EKIN",
+      "EKINZOR"
+    ]
   }
 ]
