@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "level": 1,
+    "letters": ["O", "T", "A", "K"],
+    "words": ["OT", "AT", "TA", "OTA", "TOK", "KOT", "OTAK", "TAKO"]
+  },
+  {
+    "id": 2,
+    "level": 2,
+    "letters": ["S", "U", "V", "R", "A"],
+    "words": ["SUV", "RAS", "VAR", "ASR", "SUVAR", "URSA"]
+  },
+  {
+    "id": 3,
+    "level": 3,
+    "letters": ["K", "I", "T", "O", "B"],
+    "words": ["KIT", "TOK", "BOT", "TOB", "KITOB", "BOTIK"]
+  },
+  {
+    "id": 4,
+    "level": 4,
+    "letters": ["M", "A", "K", "T", "B"],
+    "words": ["MAK", "TAK", "KAT", "MAKT", "MAKTAB"]
+  },
+  {
+    "id": 5,
+    "level": 5,
+    "letters": ["G", "U", "L", "I", "B"],
+    "words": ["GUL", "BIL", "GUL", "LIBOG", "GULBI"]
+  },
+  {
+    "id": 6,
+    "level": 6,
+    "letters": ["D", "A", "R", "Y", "O"],
+    "words": ["DAR", "YOR", "ORDA", "DARYO", "ROYDA"]
+  },
+  {
+    "id": 7,
+    "level": 7,
+    "letters": ["B", "A", "H", "O", "R"],
+    "words": ["BOR", "BAHOR", "ROBA", "HOR", "ORBA"]
+  },
+  {
+    "id": 8,
+    "level": 8,
+    "letters": ["Y", "I", "L", "D", "Z"],
+    "words": ["YIL", "DIL", "YILDIZ", "LIZ"]
+  },
+  {
+    "id": 9,
+    "level": 9,
+    "letters": ["Q", "A", "L", "A", "M"],
+    "words": ["QAL", "LAM", "MAL", "QALAM", "AMAL"]
+  },
+  {
+    "id": 10,
+    "level": 10,
+    "letters": ["O", "L", "M", "A", "S"],
+    "words": ["OLMA", "SOLA", "MOL", "SOL", "OLMAS", "SALOM"]
+  }
+]
