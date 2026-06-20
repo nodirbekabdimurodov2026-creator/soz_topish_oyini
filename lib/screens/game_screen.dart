@@ -4,13 +4,17 @@ import 'package:provider/provider.dart';
 import '../models/alphabet_mode.dart';
 import '../models/level_model.dart';
 import '../providers/game_provider.dart';
+import '../theme/app_theme.dart';
 import '../utils/circle_layout_helper.dart';
+import '../widgets/flower_celebration_overlay.dart';
 import '../widgets/word_circle_painter.dart';
 import '../widgets/word_grid_panel.dart';
 
-/// O'yinning asosiy ekrani: yuqorida krossvord paneli, pastda harflar
-/// aylanasi (GestureDetector + CustomPainter), header'da tangalar va
-/// daraja raqami, pastda "Yordam" tugmasi.
+/// O'yinning asosiy ekrani - "So'z Bog'i" dizayn tizimi bilan.
+///
+/// Tuzilma: yuqorida header (orqaga, daraja, alifbo, tangalar),
+/// o'rtada krossvord paneli, pastda harflar aylanasi va yordam tugmasi.
+/// Daraja tugaganda gul-ochilish celebration overlay chiqadi.
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
 
@@ -22,56 +26,34 @@ class _GameScreenState extends State<GameScreen>
     with SingleTickerProviderStateMixin {
   Offset? _dragPosition;
   int? _hintLetterIndex;
-  late AnimationController _shakeController;
-
-  @override
-  void initState() {
-    super.initState();
-    _shakeController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-  }
-
-  @override
-  void dispose() {
-    _shakeController.dispose();
-    super.dispose();
-  }
-
-  void _showSnack(String message, {bool isError = false}) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message, textAlign: TextAlign.center),
-        backgroundColor:
-            isError ? Colors.redAccent.shade400 : const Color(0xFF6C5CE7),
-        duration: const Duration(milliseconds: 1200),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
-  }
+  bool _showCelebration = false;
+  int _celebrationStars = 0;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<GameProvider>(
       builder: (context, game, _) {
         if (game.isLoading || game.currentLevel == null) {
-          return const Scaffold(
-            backgroundColor: Color(0xFF1B1C2E),
-            body: Center(
-              child: CircularProgressIndicator(color: Color(0xFF6C5CE7)),
+          return Scaffold(
+            backgroundColor: AppColors.background,
+            body: const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
             ),
           );
         }
 
-        // Provider'dan kelgan xabarni bir martalik ko'rsatish
         if (game.lastMessage != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (game.lastMessage != null) {
-              _showSnack(game.lastMessage!, isError: !game.isLastWordCorrect);
-              game.clearMessage();
+            if (game.lastMessage == null) return;
+            final wasLevelComplete = game.lastMessage!.contains("yakunlandi");
+            _showSnack(game.lastMessage!, isError: !game.isLastWordCorrect);
+            game.clearMessage();
+
+            if (wasLevelComplete && !_showCelebration) {
+              setState(() {
+                _showCelebration = true;
+                _celebrationStars = game.currentProgress?.starsEarned ?? 3;
+              });
             }
           });
         }
@@ -81,30 +63,52 @@ class _GameScreenState extends State<GameScreen>
         final foundWords = progress?.foundWords ?? [];
 
         return Scaffold(
-          backgroundColor: const Color(0xFF1B1C2E),
+          backgroundColor: AppColors.background,
           body: SafeArea(
-            child: Column(
+            child: Stack(
               children: [
-                _buildHeader(context, game, level),
-                const SizedBox(height: 8),
-                Expanded(
-                  flex: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SingleChildScrollView(
-                      child: WordGridPanel(
-                        allWords: level.validWords,
-                        foundWords: foundWords,
+                Column(
+                  children: [
+                    _buildHeader(context, game, level),
+                    const SizedBox(height: AppSpacing.sm),
+                    Expanded(
+                      flex: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                        child: SingleChildScrollView(
+                          child: WordGridPanel(
+                            allWords: level.validWords,
+                            foundWords: foundWords,
+                          ),
+                        ),
                       ),
                     ),
+                    Expanded(
+                      flex: 5,
+                      child: _buildLetterCircle(context, game, level),
+                    ),
+                    _buildHintButton(context, game),
+                    const SizedBox(height: AppSpacing.md),
+                  ],
+                ),
+                if (_showCelebration)
+                  FlowerCelebrationOverlay(
+                    starsEarned: _celebrationStars,
+                    onContinue: () {
+                      setState(() => _showCelebration = false);
+                      Navigator.of(context).maybePop();
+                    },
+                    onNextLevel: () {
+                      setState(() => _showCelebration = false);
+                      final nextLevel = game.levels.firstWhere(
+                        (l) => l.levelNumber == level.levelNumber + 1,
+                        orElse: () => level,
+                      );
+                      if (nextLevel.id != level.id) {
+                        game.selectLevel(nextLevel);
+                      }
+                    },
                   ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: _buildLetterCircle(context, game, level),
-                ),
-                _buildHintButton(context, game),
-                const SizedBox(height: 12),
               ],
             ),
           ),
@@ -113,44 +117,75 @@ class _GameScreenState extends State<GameScreen>
     );
   }
 
+  void _showSnack(String message, {bool isError = false}) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: AppTypography.body(size: 14, color: Colors.white, weight: FontWeight.w700),
+        ),
+        backgroundColor: isError ? AppColors.error : AppColors.leafDark,
+        duration: const Duration(milliseconds: 1100),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+        ),
+        margin: const EdgeInsets.all(AppSpacing.md),
+      ),
+    );
+  }
+
   // -----------------------------------------------------------------
-  // HEADER: orqaga, daraja raqami, tangalar, alifbo almashtirish
+  // HEADER
   // -----------------------------------------------------------------
   Widget _buildHeader(BuildContext context, GameProvider game, LevelModel level) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.sm, AppSpacing.sm, AppSpacing.md, 0,
+      ),
       child: Row(
         children: [
-          IconButton(
-            onPressed: () => Navigator.of(context).maybePop(),
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white70),
+          _circleIconButton(
+            icon: Icons.arrow_back_ios_new_rounded,
+            onTap: () => Navigator.of(context).maybePop(),
           ),
           Expanded(
             child: Column(
               children: [
                 Text(
                   "Daraja ${level.levelNumber}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTypography.display(size: 18),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   game.alphabetMode.label,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.5),
-                    fontSize: 12,
-                  ),
+                  style: AppTypography.body(size: 12),
                 ),
               ],
             ),
           ),
           _buildAlphabetSwitch(game),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSpacing.sm),
           _buildCoinBadge(game),
         ],
+      ),
+    );
+  }
+
+  Widget _circleIconButton({required IconData icon, required VoidCallback onTap}) {
+    return Material(
+      color: AppColors.surface,
+      shape: const CircleBorder(),
+      elevation: 0,
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Icon(icon, color: AppColors.textPrimary, size: 18),
+        ),
       ),
     );
   }
@@ -164,18 +199,19 @@ class _GameScreenState extends State<GameScreen>
         game.switchAlphabet(next);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.08),
-          borderRadius: BorderRadius.circular(10),
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+          boxShadow: softShadow(opacity: 0.06, blur: 8),
         ),
         child: Row(
           children: [
-            const Icon(Icons.translate, color: Colors.white70, size: 16),
+            Icon(Icons.translate_rounded, color: AppColors.secondaryDark, size: 16),
             const SizedBox(width: 4),
             Text(
               game.alphabetMode == AlphabetMode.lotin ? "АБВ" : "ABC",
-              style: const TextStyle(color: Colors.white70, fontSize: 12),
+              style: AppTypography.body(size: 12, weight: FontWeight.w700),
             ),
           ],
         ),
@@ -185,23 +221,19 @@ class _GameScreenState extends State<GameScreen>
 
   Widget _buildCoinBadge(GameProvider game) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFD700).withOpacity(0.15),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFFFD700).withOpacity(0.4)),
+        gradient: AppColors.goldGradient,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+        boxShadow: softShadow(opacity: 0.15, blur: 8),
       ),
       child: Row(
         children: [
-          const Icon(Icons.monetization_on, color: Color(0xFFFFD700), size: 18),
+          const Icon(Icons.monetization_on_rounded, color: Colors.white, size: 18),
           const SizedBox(width: 4),
           Text(
             "${game.coins}",
-            style: const TextStyle(
-              color: Color(0xFFFFD700),
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
+            style: AppTypography.button(size: 14, color: Colors.white),
           ),
         ],
       ),
@@ -209,7 +241,7 @@ class _GameScreenState extends State<GameScreen>
   }
 
   // -----------------------------------------------------------------
-  // HARFLAR AYLANASI: GestureDetector + CustomPainter
+  // HARFLAR AYLANASI
   // -----------------------------------------------------------------
   Widget _buildLetterCircle(BuildContext context, GameProvider game, LevelModel level) {
     return Center(
@@ -267,37 +299,43 @@ class _GameScreenState extends State<GameScreen>
   }
 
   // -----------------------------------------------------------------
-  // YORDAM (PODSKAZKA) TUGMASI
+  // YORDAM TUGMASI
   // -----------------------------------------------------------------
   Widget _buildHintButton(BuildContext context, GameProvider game) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
             backgroundColor: game.canAffordHint
-                ? const Color(0xFFFFA502)
-                : Colors.white.withOpacity(0.1),
+                ? AppColors.secondary
+                : AppColors.surfaceMuted,
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 14),
+            padding: const EdgeInsets.symmetric(vertical: 15),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
             ),
+            elevation: 0,
           ),
-          icon: const Icon(Icons.lightbulb_outline),
+          icon: Icon(
+            Icons.lightbulb_rounded,
+            color: game.canAffordHint ? Colors.white : AppColors.textSecondary,
+          ),
           label: Text(
             "Yordam (${GameProvider.hintCost} tanga)",
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: AppTypography.button(
+              size: 15,
+              color: game.canAffordHint ? Colors.white : AppColors.textSecondary,
+            ),
           ),
           onPressed: () {
-            // Vizual "yoritish" effekti - tasodifiy harfni bir lahza belgilaymiz
             final highlighted = game.hintHighlightLetterIndex();
             setState(() => _hintLetterIndex = highlighted);
 
             final revealedWord = game.useHint();
 
-            Future.delayed(const Duration(milliseconds: 600), () {
+            Future.delayed(AppMotion.slow, () {
               if (mounted) setState(() => _hintLetterIndex = null);
             });
 

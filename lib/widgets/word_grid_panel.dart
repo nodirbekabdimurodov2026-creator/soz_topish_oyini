@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 /// Topilishi kerak bo'lgan so'zlar uchun krossvord-uslubidagi katakchalar
 /// panelini chizadi. So'z topilganda mos katakchalar harflarga to'ladi,
 /// topilmagan bo'lsa bo'sh (faqat chiziq) ko'rinishda qoladi.
 class WordGridPanel extends StatelessWidget {
-  final List<String> allWords; // level.validWords (katta harfda)
+  final List<String> allWords;
   final List<String> foundWords;
 
   const WordGridPanel({
@@ -15,15 +16,13 @@ class WordGridPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Uzunligi bo'yicha guruhlaymiz - ko'pchilik so'z-topish o'yinlarida
-    // qisqa so'zlar yuqorida, uzunlar pastda joylashadi.
     final sorted = [...allWords]
       ..sort((a, b) => a.length.compareTo(b.length));
 
     return Wrap(
       alignment: WrapAlignment.center,
-      spacing: 12,
-      runSpacing: 10,
+      spacing: AppSpacing.sm,
+      runSpacing: AppSpacing.sm,
       children: sorted.map((word) {
         final isFound = foundWords.contains(word.toUpperCase());
         return _WordSlot(word: word, isFound: isFound);
@@ -45,33 +44,31 @@ class _WordSlot extends StatelessWidget {
       children: List.generate(word.length, (i) {
         final letter = isFound ? word[i] : '';
         return AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
+          duration: AppMotion.normal,
+          curve: AppMotion.snap,
           margin: const EdgeInsets.symmetric(horizontal: 2),
-          width: 28,
-          height: 32,
+          width: 30,
+          height: 34,
           decoration: BoxDecoration(
-            color: isFound
-                ? const Color(0xFF6C5CE7)
-                : Colors.white.withOpacity(0.08),
-            borderRadius: BorderRadius.circular(6),
+            gradient: isFound ? AppColors.letterCircleGradient : null,
+            color: isFound ? null : AppColors.surfaceMuted,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
             border: Border.all(
               color: isFound
-                  ? Colors.white.withOpacity(0.6)
-                  : Colors.white.withOpacity(0.25),
+                  ? Colors.white.withOpacity(0.5)
+                  : AppColors.textSecondary.withOpacity(0.15),
               width: 1.2,
             ),
+            boxShadow: isFound ? softShadow(opacity: 0.12, blur: 6) : null,
           ),
           alignment: Alignment.center,
           child: Text(
             letter,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: AppTypography.letter(size: 16, color: Colors.white),
           ),
         );
       }),
     );
   }
 }
+

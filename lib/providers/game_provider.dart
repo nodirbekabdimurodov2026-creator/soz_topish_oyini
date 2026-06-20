@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../database/database_helper.dart';
 import '../models/alphabet_mode.dart';
+import '../models/daily_reward_state.dart';
 import '../models/level_model.dart';
 import '../models/level_progress.dart';
 
@@ -28,6 +30,7 @@ class GameProvider extends ChangeNotifier {
   static const _kCurrentLevelIdKey = 'current_level_id';
   static const _kProgressPrefix = 'progress_level_';
   static const _kUnlockedLevelsKey = 'unlocked_level_numbers';
+  static const _kDailyRewardKey = 'daily_reward_state';
 
   // ---------------------------------------------------------------------
   // HOLAT (STATE)
@@ -77,6 +80,13 @@ class GameProvider extends ChangeNotifier {
   bool _isLastWordCorrect = false;
   bool get isLastWordCorrect => _isLastWordCorrect;
 
+  DailyRewardState _dailyReward = DailyRewardState.initial();
+  DailyRewardState get dailyReward => _dailyReward;
+
+  /// Bugun hali olinmagan kunlik mukofot bormi - GameProvider yuklangandan
+  /// keyin UI shu flagga qarab popup ko'rsatadi.
+  bool get hasUnclaimedDailyReward => !_dailyReward.claimedToday;
+
   // ---------------------------------------------------------------------
   // BOSHLANG'ICH YUKLASH
   // ---------------------------------------------------------------------
@@ -97,6 +107,8 @@ class GameProvider extends ChangeNotifier {
         ..clear()
         ..addAll(unlocked.map(int.parse));
     }
+
+    _dailyReward = _loadDailyRewardState(prefs);
 
     await loadLevelsForCurrentAlphabet();
 
@@ -415,6 +427,70 @@ class GameProvider extends ChangeNotifier {
   /// Reklama tomosha qilingandan keyin yoki boshqa tashqi manbadan
   /// tanga qo'shish uchun ochiq metod (masalan RewardedAd callback'ida).
   Future<void> addCoinsExternal(int amount) => _addCoins(amount);
+
+  // ---------------------------------------------------------------------
+  // KUNLIK MUKOFOT / STREAK
+  // ---------------------------------------------------------------------
+
+  /// SharedPreferences'dan streak holatini o'qiydi va bugun allaqachon
+  /// olingan-olinmaganini sana solishtirish orqali aniqlaydi.
+  DailyRewardState _loadDailyRewardState(SharedPreferences prefs) {
+    final raw = prefs.getString(_kDailyRewardKey);
+    if (raw == null) return DailyRewardState.initial();
+
+    final json = jsonDecode(raw) as Map<String, dynamic>;
+    final state = DailyRewardState.fromJson(json);
+
+    if (state.lastClaimDate == null) return state;
+
+    final now = DateTime.now();
+    final last = state.lastClaimDate!;
+    final isSameDay = now.year == last.year &&
+        now.month == last.month &&
+        now.day == last.day;
+
+    return state.copyWith(claimedToday: isSameDay);
+  }
+
+  Future<void> _persistDailyRewardState() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kDailyRewardKey, jsonEncode(_dailyReward.toJson()));
+  }
+
+  /// Kunlik mukofotni oladi. Agar oxirgi kirish kechagi kun bo'lsa streak
+  /// davom etadi, aks holda (1 kundan ortiq tanaffus) streak qaytadan
+  /// boshlanadi - bu odamni har kuni qaytib kelishga undaydigan klassik
+  /// mexanika.
+  int claimDailyReward() {
+    if (_dailyReward.claimedToday) return 0;
+
+    final now = DateTime.now();
+    final last = _dailyReward.lastClaimDate;
+    int newStreak;
+
+    if (last == null) {
+      newStreak = 1;
+    } else {
+      final yesterday = now.subtract(const Duration(days: 1));
+      final wasYesterday = last.year == yesterday.year &&
+          last.month == yesterday.month &&
+          last.day == yesterday.day;
+      newStreak = wasYesterday ? _dailyReward.currentStreak + 1 : 1;
+    }
+
+    final reward = DailyRewardState.rewardCycle[(newStreak - 1) % 7];
+
+    _dailyReward = _dailyReward.copyWith(
+      lastClaimDate: now,
+      currentStreak: newStreak,
+      longestStreak: max(newStreak, _dailyReward.longestStreak),
+      claimedToday: true,
+    );
+    _persistDailyRewardState();
+    _addCoins(reward);
+
+    return reward;
+  }
 
   void clearMessage() {
     _lastMessage = null;

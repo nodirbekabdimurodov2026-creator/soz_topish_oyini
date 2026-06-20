@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 import '../utils/circle_layout_helper.dart';
 
 /// Aylanadagi harflarni, ular orasidagi ulanish chiziqlarini va
 /// barmoq harakatini chizuvchi CustomPainter.
 ///
-/// `repaint` uchun Listenable berilmaydi - GameScreen GestureDetector
-/// state o'zgarganda setState/Provider orqali qayta chizilishini
-/// ta'minlaydi (ConsumerWidget/Provider.of orqali rebuild).
+/// Rang sxemasi AppColors dizayn tizimidan olinadi - "So'z Bog'i" temasi:
+/// harf doirachalari yashil-bog' gradienti, tanlangan harflar korall-qizil,
+/// ulanish chizig'i esa iliq oltin rangda.
 class WordCirclePainter extends CustomPainter {
   final List<String> letters;
   final List<int> selectedIndices;
-  final Offset? currentDragPosition; // barmoq hozir turgan joy (erkin chizish uchun)
-  final int? hintLetterIndex; // "Yordam" bosilganda yoritiladigan harf
-  final Color baseColor;
-  final Color selectedColor;
-  final Color lineColor;
-  final Color hintColor;
+  final Offset? currentDragPosition;
+  final int? hintLetterIndex;
 
   WordCirclePainter({
     required this.letters,
     required this.selectedIndices,
     this.currentDragPosition,
     this.hintLetterIndex,
-    this.baseColor = const Color(0xFF2D2F45),
-    this.selectedColor = const Color(0xFF6C5CE7),
-    this.lineColor = const Color(0xFFFFA502),
-    this.hintColor = const Color(0xFFFFD700),
   });
 
   @override
@@ -44,7 +37,7 @@ class WordCirclePainter extends CustomPainter {
     if (selectedIndices.length < 2) return;
 
     final linePaint = Paint()
-      ..color = lineColor.withOpacity(0.85)
+      ..color = AppColors.gold.withOpacity(0.9)
       ..strokeWidth = 10
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
@@ -60,9 +53,8 @@ class WordCirclePainter extends CustomPainter {
     }
     canvas.drawPath(path, linePaint);
 
-    // Chiziq ustiga ingichka oq chiziq - "neon" effekti uchun
     final highlightPaint = Paint()
-      ..color = Colors.white.withOpacity(0.5)
+      ..color = Colors.white.withOpacity(0.6)
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
@@ -75,7 +67,7 @@ class WordCirclePainter extends CustomPainter {
 
     final lastPos = layout.positionFor(selectedIndices.last);
     final tailPaint = Paint()
-      ..color = lineColor.withOpacity(0.5)
+      ..color = AppColors.gold.withOpacity(0.5)
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
@@ -90,48 +82,41 @@ class WordCirclePainter extends CustomPainter {
       final isSelected = selectedIndices.contains(i);
       final isHint = hintLetterIndex == i;
 
+      final List<Color> gradientColors = isSelected
+          ? [AppColors.primary, AppColors.primaryDark]
+          : isHint
+              ? [AppColors.gold, AppColors.goldDark]
+              : [AppColors.leafLight, AppColors.leafDark];
+
       final circlePaint = Paint()
         ..style = PaintingStyle.fill
-        ..shader = RadialGradient(
-          colors: isSelected
-              ? [selectedColor, selectedColor.withOpacity(0.8)]
-              : isHint
-                  ? [hintColor, hintColor.withOpacity(0.7)]
-                  : [baseColor.withOpacity(0.95), baseColor],
-          center: Alignment.topLeft,
-          radius: 1.2,
+        ..shader = LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ).createShader(
           Rect.fromCircle(center: pos, radius: layout.letterRadius),
         );
 
-      // Soya
+      // Yumshoq soya - "qog'oz ustida" his
       canvas.drawCircle(
-        pos.translate(0, 3),
+        pos.translate(0, isSelected ? 2 : 4),
         layout.letterRadius,
-        Paint()..color = Colors.black.withOpacity(0.25),
+        Paint()..color = AppColors.textPrimary.withOpacity(isSelected ? 0.12 : 0.18),
       );
 
       canvas.drawCircle(pos, layout.letterRadius, circlePaint);
 
-      // Chegara chizig'i
       final borderPaint = Paint()
-        ..color = isSelected
-            ? Colors.white.withOpacity(0.9)
-            : Colors.white.withOpacity(0.08)
+        ..color = isSelected ? Colors.white.withOpacity(0.95) : Colors.white.withOpacity(0.35)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = isSelected ? 2.5 : 1.5;
+        ..strokeWidth = isSelected ? 3 : 2;
       canvas.drawCircle(pos, layout.letterRadius, borderPaint);
 
-      // Harf matni
       final textPainter = TextPainter(
         text: TextSpan(
           text: letters[i],
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: letters[i].length > 1 ? 18 : 22,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
-          ),
+          style: AppTypography.letter(size: letters[i].length > 1 ? 18 : 22),
         ),
         textDirection: TextDirection.ltr,
       )..layout();
@@ -152,3 +137,4 @@ class WordCirclePainter extends CustomPainter {
         oldDelegate.hintLetterIndex != hintLetterIndex;
   }
 }
+

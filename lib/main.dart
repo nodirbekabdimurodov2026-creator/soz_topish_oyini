@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 
 import 'providers/game_provider.dart';
 import 'screens/level_select_screen.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // O'yin faqat vertikal rejimda ishlashi uchun (UX talabi)
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -25,16 +25,20 @@ class SozTopishApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => GameProvider(),
       child: MaterialApp(
-        title: "So'z topish o'yini",
+        title: "So'z Bog'i",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
-          scaffoldBackgroundColor: const Color(0xFF1B1C2E),
+          scaffoldBackgroundColor: AppColors.background,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF6C5CE7),
-            brightness: Brightness.dark,
+            seedColor: AppColors.primary,
+            brightness: Brightness.light,
+            surface: AppColors.surface,
           ),
-          fontFamily: 'Roboto',
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: AppColors.textPrimary,
+                displayColor: AppColors.textPrimary,
+              ),
         ),
         home: const LevelSelectScreen(),
       ),
