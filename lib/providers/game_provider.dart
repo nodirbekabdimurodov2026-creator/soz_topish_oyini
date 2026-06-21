@@ -8,6 +8,7 @@ import '../models/alphabet_mode.dart';
 import '../models/daily_reward_state.dart';
 import '../models/level_model.dart';
 import '../models/level_progress.dart';
+import '../services/ad_service.dart';
 
 /// O'yinning markaziy holat boshqaruvchisi (Provider/ChangeNotifier asosida).
 ///
@@ -293,7 +294,7 @@ class GameProvider extends ChangeNotifier {
 
     if (isValidWord && !alreadyFound) {
       final updatedFound = [...progress.foundWords, normalizedWord];
-      final isLevelComplete = updatedFound.length >= level.validWords.length;
+      final isLevelComplete = updatedFound.length >= level.completionThreshold;
       final stars = _calculateStars(updatedFound.length, level.validWords.length);
 
       final updatedProgress = progress.copyWith(
@@ -314,6 +315,7 @@ class GameProvider extends ChangeNotifier {
         _unlockNextLevel();
         _addCoins(20); // level tugatish bonusi
         _lastMessage = "Ajoyib! Daraja yakunlandi 🎉";
+        AdService.instance.notifyLevelCompleted();
       }
     } else if (alreadyFound) {
       _isLastWordCorrect = false;
@@ -356,6 +358,26 @@ class GameProvider extends ChangeNotifier {
   /// Bu real loyihalarda har bir katakka mos "letter reveal" indeksini
   /// alohida saqlash orqali ham amalga oshirilishi mumkin (kengaytma uchun
   /// pastdagi izohga qarang).
+  /// Reklama ko'rib qo'shimcha tanga olish imkoniyatini taqdim etadi.
+  /// [onEarned] reklama muvaffaqiyatli tomosha qilingach chaqiriladi,
+  /// [onNotAvailable] reklama hozircha tayyor bo'lmasa chaqiriladi.
+  void watchAdForCoins({
+    required VoidCallback onEarned,
+    required VoidCallback onNotAvailable,
+  }) {
+    AdService.instance.showRewardedAd(
+      onRewardEarned: () {
+        _addCoins(20);
+        _lastMessage = "Tabriklaymiz! 20 tanga qo'shildi";
+        notifyListeners();
+        onEarned();
+      },
+      onAdNotReady: onNotAvailable,
+    );
+  }
+
+  bool get isRewardedAdReady => AdService.instance.isRewardedAdReady;
+
   String? useHint() {
     final level = _currentLevel;
     if (level == null) return null;
@@ -383,7 +405,7 @@ class GameProvider extends ChangeNotifier {
     final revealedWord = remaining.first;
 
     final updatedFound = [...progress.foundWords, revealedWord];
-    final isLevelComplete = updatedFound.length >= level.validWords.length;
+    final isLevelComplete = updatedFound.length >= level.completionThreshold;
     final stars = _calculateStars(updatedFound.length, level.validWords.length);
 
     final updatedProgress = progress.copyWith(
@@ -402,6 +424,7 @@ class GameProvider extends ChangeNotifier {
 
     if (isLevelComplete) {
       _unlockNextLevel();
+      AdService.instance.notifyLevelCompleted();
     }
 
     notifyListeners();

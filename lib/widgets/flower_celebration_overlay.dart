@@ -83,9 +83,9 @@ class _FlowerCelebrationOverlayState extends State<FlowerCelebrationOverlay>
               ? 0
               : (bloom).clamp(0.0, 1.0),
           child: Icon(
-            Icons.eco,
-            size: 18 + (10 * bloom),
-            color: AppColors.leafLight,
+            Icons.star_rounded,
+            size: 16 + (10 * bloom),
+            color: AppColors.gold,
           ),
         ),
       );
@@ -109,7 +109,15 @@ class _FlowerCelebrationOverlayState extends State<FlowerCelebrationOverlay>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text("🌸", style: TextStyle(fontSize: 56)),
+            Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                color: AppColors.success.withOpacity(0.12),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.check_rounded, color: AppColors.success, size: 36),
+            ),
             const SizedBox(height: AppSpacing.sm),
             Text("Daraja yakunlandi!", style: AppTypography.display(size: 20)),
             const SizedBox(height: AppSpacing.md),

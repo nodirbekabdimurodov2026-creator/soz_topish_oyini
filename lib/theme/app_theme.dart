@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-/// "So'z Bog'i" dizayn tizimi.
-///
-/// Maqsad: 10 yoshdan 100 yoshgacha bo'lgan foydalanuvchi uchun bir xil
-/// yoqimli bo'lish - yumshoq, yuqori kontrast, dumaloq shakllar, ko'z
-/// charchatmaydigan issiq fon. Progress metaforasi: gul o'sishi.
+/// Klassik, professional dizayn tizimi - 20+ yosh auditoriya uchun.
+/// Oq fon, to'q matn, minimal rangli urg'u. Ko'z charchamaydigan,
+/// jiddiy va ishonchli ko'rinish.
 class AppColors {
-  // Fon va sirt ranglari - issiq krem, ko'zga yumshoq
-  static const Color background = Color(0xFFFFF8EC);
+  static const Color background = Color(0xFFFFFFFF);
   static const Color surface = Color(0xFFFFFFFF);
-  static const Color surfaceMuted = Color(0xFFF3ECDD);
+  static const Color surfaceMuted = Color(0xFFF2F3F5);
 
-  // Asosiy palette
-  static const Color primary = Color(0xFFFF6B6B); // korall-qizil
-  static const Color primaryDark = Color(0xFFE85555);
-  static const Color secondary = Color(0xFF4ECDC4); // turkuaz
-  static const Color secondaryDark = Color(0xFF38B2A8);
-  static const Color gold = Color(0xFFFFD93D); // tanga/mukofot
-  static const Color goldDark = Color(0xFFE8BE1F);
+  // Yagona, jiddiy urg'u rangi - to'q ko'k-kulrang
+  static const Color primary = Color(0xFF2B2D42);
+  static const Color primaryDark = Color(0xFF1A1B2E);
+  static const Color secondary = Color(0xFF4361EE);
+  static const Color secondaryDark = Color(0xFF3A50C9);
+  static const Color gold = Color(0xFFB8860B);
+  static const Color goldDark = Color(0xFF9A6F09);
 
-  // Gul-bog' gradient (harf doirachalari, progress)
-  static const Color leafLight = Color(0xFFA8E6CF);
-  static const Color leafDark = Color(0xFF6FCF97);
+  static const Color leafLight = Color(0xFF6C7A89);
+  static const Color leafDark = Color(0xFF4A5568);
 
-  // Matn
-  static const Color textPrimary = Color(0xFF2D3142);
+  static const Color textPrimary = Color(0xFF1A1B2E);
   static const Color textSecondary = Color(0xFF6B7280);
   static const Color textOnDark = Color(0xFFFFFFFF);
 
-  // Holat ranglari
-  static const Color success = Color(0xFF6FCF97);
-  static const Color error = Color(0xFFFF6B6B);
-  static const Color locked = Color(0xFFD8D2C2);
+  static const Color success = Color(0xFF2D9D78);
+  static const Color error = Color(0xFFD64545);
+  static const Color locked = Color(0xFFE2E4E8);
+  static const Color border = Color(0xFFE5E7EB);
 
   static const LinearGradient letterCircleGradient = LinearGradient(
     colors: [leafLight, leafDark],
@@ -40,7 +36,7 @@ class AppColors {
   );
 
   static const LinearGradient selectedLetterGradient = LinearGradient(
-    colors: [primary, primaryDark],
+    colors: [secondary, secondaryDark],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -53,40 +49,34 @@ class AppColors {
 }
 
 class AppTypography {
-  /// Sarlavhalar uchun - yirik, dumaloq, do'stona.
-  /// Tizimning standart shrifti (Roboto/SF) ishlatiladi - hech qanday
-  /// qo'shimcha font fayli yoki internet bog'liqligi yo'q, bu build
-  /// barqarorligi uchun ataylab qilingan tanlov.
-  static TextStyle display({double size = 28, Color? color}) => TextStyle(
-        fontSize: size,
-        fontWeight: FontWeight.w800,
-        color: color ?? AppColors.textPrimary,
-        height: 1.15,
-        letterSpacing: -0.3,
-      );
-
-  /// Tugma va asosiy interaktiv matn uchun.
-  static TextStyle button({double size = 18, Color? color}) => TextStyle(
+  static TextStyle display({double size = 26, Color? color}) =>
+      GoogleFonts.inter(
         fontSize: size,
         fontWeight: FontWeight.w700,
-        color: color ?? AppColors.textOnDark,
-        letterSpacing: 0.2,
+        color: color ?? AppColors.textPrimary,
+        height: 1.15,
+        letterSpacing: -0.5,
       );
 
-  /// Oddiy matn, izoh, body uchun.
-  static TextStyle body({double size = 15, Color? color, FontWeight? weight}) =>
-      TextStyle(
+  static TextStyle button({double size = 16, Color? color}) =>
+      GoogleFonts.inter(
         fontSize: size,
-        fontWeight: weight ?? FontWeight.w500,
+        fontWeight: FontWeight.w600,
+        color: color ?? AppColors.textOnDark,
+      );
+
+  static TextStyle body({double size = 14, Color? color, FontWeight? weight}) =>
+      GoogleFonts.inter(
+        fontSize: size,
+        fontWeight: weight ?? FontWeight.w400,
         color: color ?? AppColors.textSecondary,
       );
 
-  /// Harf doirachalaridagi katta harflar uchun.
-  static TextStyle letter({double size = 24, Color? color}) => TextStyle(
+  static TextStyle letter({double size = 22, Color? color}) =>
+      GoogleFonts.inter(
         fontSize: size,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w700,
         color: color ?? AppColors.textOnDark,
-        letterSpacing: 0.5,
       );
 }
 
@@ -98,9 +88,9 @@ class AppSpacing {
   static const double xl = 32;
   static const double xxl = 48;
 
-  static const double radiusSm = 12;
-  static const double radiusMd = 20;
-  static const double radiusLg = 28;
+  static const double radiusSm = 8;
+  static const double radiusMd = 14;
+  static const double radiusLg = 20;
   static const double radiusPill = 100;
 }
 
@@ -115,12 +105,11 @@ class AppMotion {
   static const Curve snap = Curves.easeOutBack;
 }
 
-/// Ilova bo'ylab ishlatiladigan soya (shadow) - yumshoq, "qog'oz ustida"
-/// his beradigan, lekin og'ir emas.
-List<BoxShadow> softShadow({double opacity = 0.08, double blur = 16}) => [
+/// Yumshoq soya - oq fonda nozik chegara hissi beradi.
+List<BoxShadow> softShadow({double opacity = 0.06, double blur = 12}) => [
       BoxShadow(
         color: AppColors.textPrimary.withOpacity(opacity),
         blurRadius: blur,
-        offset: const Offset(0, 6),
+        offset: const Offset(0, 4),
       ),
     ];

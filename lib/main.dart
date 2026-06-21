@@ -4,15 +4,20 @@ import 'package:provider/provider.dart';
 
 import 'providers/game_provider.dart';
 import 'screens/level_select_screen.dart';
+import 'services/ad_service.dart';
 import 'theme/app_theme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Reklama xizmatini fonda ishga tushiramiz - bu UI'ni bloklamasligi
+  // uchun await qilinmaydi, lekin chaqirish darrov amalga oshiriladi.
+  AdService.instance.initialize();
 
   runApp(const SozTopishApp());
 }

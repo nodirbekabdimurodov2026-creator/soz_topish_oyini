@@ -15,6 +15,14 @@ class LevelModel {
   final String mainWord;
   final int starThreshold; // nechta so'z topilsa 3 yulduz beriladi (masalan)
 
+  /// Daraja "tugagan" deb hisoblanishi uchun kerak bo'lgan minimal
+  /// so'zlar soni. Bu validWords.length'dan kichik bo'lishi mumkin -
+  /// shunda foydalanuvchi hamma so'zni topmasdan ham keyingi darajaga
+  /// o'tishi mumkin (qolgan so'zlar ixtiyoriy bonus bo'lib qoladi).
+  /// Birinchi darajalarda past (tezroq g'alaba hissi), keyinroq
+  /// validWords.length'ga yaqinlashadi.
+  final int completionThreshold;
+
   LevelModel({
     required this.id,
     required this.levelNumber,
@@ -23,7 +31,9 @@ class LevelModel {
     required this.validWords,
     required this.mainWord,
     this.starThreshold = 0,
-  });
+    int? completionThreshold,
+  }) : completionThreshold =
+            completionThreshold ?? validWords.length;
 
   /// SQLite jadvalidan o'qish uchun.
   factory LevelModel.fromMap(Map<String, dynamic> map) {
@@ -35,6 +45,7 @@ class LevelModel {
       validWords: List<String>.from(jsonDecode(map['valid_words'] as String)),
       mainWord: map['main_word'] as String,
       starThreshold: map['star_threshold'] as int? ?? 0,
+      completionThreshold: map['completion_threshold'] as int?,
     );
   }
 
@@ -48,7 +59,20 @@ class LevelModel {
       'valid_words': jsonEncode(validWords),
       'main_word': mainWord,
       'star_threshold': starThreshold,
+      'completion_threshold': completionThreshold,
     };
+  }
+
+  /// Daraja raqamiga qarab, daraja tugatish uchun zarur bo'lgan so'zlar
+  /// sonini progressiv tarzda hisoblaydi. Boshida juda yengil (2 ta so'z),
+  /// 1-15 darajalarda asta-sekin ko'tariladi, 16-darajadan keyin esa
+  /// barcha so'zlar talab qilinadi (to'liq qiyinlik).
+  static int _progressiveThreshold(int levelNumber, int totalWords) {
+    if (totalWords <= 2) return totalWords;
+    if (levelNumber <= 3) return 2;
+    if (levelNumber <= 8) return (totalWords * 0.4).ceil().clamp(2, totalWords);
+    if (levelNumber <= 15) return (totalWords * 0.6).ceil().clamp(2, totalWords);
+    return totalWords;
   }
 
   /// assets/data/*.json fayllaridan boshlang'ich import qilish uchun.
@@ -56,14 +80,16 @@ class LevelModel {
     final words = List<String>.from(json['words'] as List);
     // Eng uzun so'zni asosiy so'z deb belgilaymiz
     words.sort((a, b) => b.length.compareTo(a.length));
+    final levelNumber = json['level'] as int;
     return LevelModel(
       id: json['id'] as int,
-      levelNumber: json['level'] as int,
+      levelNumber: levelNumber,
       alphabetKey: alphabetKey,
       circleLetters: List<String>.from(json['letters'] as List),
       validWords: words,
       mainWord: words.isNotEmpty ? words.first : '',
       starThreshold: (words.length * 0.6).ceil(),
+      completionThreshold: _progressiveThreshold(levelNumber, words.length),
     );
   }
 }

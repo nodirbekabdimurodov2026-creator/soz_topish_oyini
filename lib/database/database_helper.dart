@@ -16,7 +16,7 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
 
   static const String _dbName = 'soz_topish.db';
-  static const int _dbVersion = 1;
+  static const int _dbVersion = 2;
 
   static const String tableLevels = 'levels';
 
@@ -36,7 +36,17 @@ class DatabaseHelper {
       path,
       version: _dbVersion,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
+  }
+
+  /// Eski o'rnatishlarda (v1) jadval strukturasi o'zgargani uchun,
+  /// eng oson va xavfsiz yo'l - jadvalni butunlay qayta yaratish va
+  /// assetlardan qaytadan seed qilish. Foydalanuvchi progressi
+  /// (shared_preferences'da saqlanadi) bunga ta'sir qilmaydi.
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    await db.execute('DROP TABLE IF EXISTS $tableLevels');
+    await _onCreate(db, newVersion);
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -48,7 +58,8 @@ class DatabaseHelper {
         circle_letters TEXT NOT NULL,
         valid_words TEXT NOT NULL,
         main_word TEXT NOT NULL,
-        star_threshold INTEGER NOT NULL DEFAULT 0
+        star_threshold INTEGER NOT NULL DEFAULT 0,
+        completion_threshold INTEGER NOT NULL DEFAULT 0
       )
     ''');
 

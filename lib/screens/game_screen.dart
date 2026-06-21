@@ -299,51 +299,85 @@ class _GameScreenState extends State<GameScreen>
   }
 
   // -----------------------------------------------------------------
-  // YORDAM TUGMASI
+  // YORDAM TUGMASI + REKLAMA ORQALI TANGA OLISH
   // -----------------------------------------------------------------
   Widget _buildHintButton(BuildContext context, GameProvider game) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: game.canAffordHint
-                ? AppColors.secondary
-                : AppColors.surfaceMuted,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: game.canAffordHint
+                    ? AppColors.secondary
+                    : AppColors.surfaceMuted,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+                ),
+                elevation: 0,
+              ),
+              icon: Icon(
+                Icons.lightbulb_rounded,
+                color: game.canAffordHint ? Colors.white : AppColors.textSecondary,
+              ),
+              label: Text(
+                "Yordam (${GameProvider.hintCost} tanga)",
+                style: AppTypography.button(
+                  size: 15,
+                  color: game.canAffordHint ? Colors.white : AppColors.textSecondary,
+                ),
+              ),
+              onPressed: () {
+                final highlighted = game.hintHighlightLetterIndex();
+                setState(() => _hintLetterIndex = highlighted);
+
+                final revealedWord = game.useHint();
+
+                Future.delayed(AppMotion.slow, () {
+                  if (mounted) setState(() => _hintLetterIndex = null);
+                });
+
+                if (revealedWord == null && !game.canAffordHint) {
+                  _showSnack("Tangalar yetarli emas!", isError: true);
+                }
+              },
             ),
-            elevation: 0,
           ),
-          icon: Icon(
-            Icons.lightbulb_rounded,
-            color: game.canAffordHint ? Colors.white : AppColors.textSecondary,
-          ),
-          label: Text(
-            "Yordam (${GameProvider.hintCost} tanga)",
-            style: AppTypography.button(
-              size: 15,
-              color: game.canAffordHint ? Colors.white : AppColors.textSecondary,
+          if (!game.canAffordHint) ...[
+            const SizedBox(height: AppSpacing.sm),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.gold,
+                  side: const BorderSide(color: AppColors.gold),
+                  padding: const EdgeInsets.symmetric(vertical: 13),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+                  ),
+                ),
+                icon: const Icon(Icons.play_circle_outline_rounded),
+                label: Text(
+                  "Reklama ko'rib +20 tanga",
+                  style: AppTypography.button(size: 14, color: AppColors.gold),
+                ),
+                onPressed: () {
+                  game.watchAdForCoins(
+                    onEarned: () => _showSnack("20 tanga qo'shildi!"),
+                    onNotAvailable: () => _showSnack(
+                      "Reklama hozircha tayyor emas, birozdan keyin urinib ko'ring",
+                      isError: true,
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          onPressed: () {
-            final highlighted = game.hintHighlightLetterIndex();
-            setState(() => _hintLetterIndex = highlighted);
-
-            final revealedWord = game.useHint();
-
-            Future.delayed(AppMotion.slow, () {
-              if (mounted) setState(() => _hintLetterIndex = null);
-            });
-
-            if (revealedWord == null && !game.canAffordHint) {
-              _showSnack("Tangalar yetarli emas!", isError: true);
-            }
-          },
-        ),
+          ],
+        ],
       ),
     );
   }
