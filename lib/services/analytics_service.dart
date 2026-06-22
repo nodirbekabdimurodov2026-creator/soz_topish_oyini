@@ -1,19 +1,21 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Foydalanuvchi faolligini kuzatuvchi xizmat.
+/// Foydalanuvchi faolligini kuzatuvchi xizmat - Firebase Analytics orqali.
 ///
-/// HOZIRGI HOLAT: faqat qurilmaning o'zida (shared_preferences) statistika
-/// to'planadi - server yo'q. Bu o'yin ichida "Statistika" ekranida
-/// foydalanuvchining o'ziga ko'rsatish uchun foydali, lekin Sizga (dasturchiga)
-/// boshqa foydalanuvchilar haqida ma'lumot bermaydi.
+/// Firebase Analytics konsoli (console.firebase.google.com) orqali siz
+/// quyidagilarni ko'rishingiz mumkin: kunlik/oylik faol foydalanuvchilar
+/// soni, o'rtacha sessiya davomiyligi, qaysi darajada odamlar to'xtab
+/// qolishi, va boshqa ko'p narsa - barchasi tayyor dashboard'da.
 ///
-/// KELAJAKDA SERVERGA ULASH UCHUN: pastdagi [_sendToServer] metodini
-/// to'ldiring (masalan http.post orqali o'z backendingizga, yoki Firebase
-/// Analytics/Supabase kabi tayyor xizmatga). Bu klassning boshqa joylardan
-/// chaqirilishi o'zgarmaydi - faqat shu bitta metod ichini to'ldirish kifoya.
+/// Bundan tashqari, lokal (qurilmaning o'zida) statistika ham saqlanadi -
+/// bu foydalanuvchining o'ziga "Statistika" ekranida ko'rsatish uchun
+/// foydali bo'lishi mumkin.
 class AnalyticsService {
   AnalyticsService._internal();
   static final AnalyticsService instance = AnalyticsService._internal();
+
+  FirebaseAnalytics? _analytics;
 
   static const _kTotalSessionsKey = 'analytics_total_sessions';
   static const _kTotalPlayTimeSecondsKey = 'analytics_total_playtime_seconds';
@@ -22,6 +24,10 @@ class AnalyticsService {
   static const _kLastOpenDateKey = 'analytics_last_open_date';
 
   DateTime? _sessionStartTime;
+
+  void attachFirebaseAnalytics(FirebaseAnalytics analytics) {
+    _analytics = analytics;
+  }
 
   /// Ilova ochilganda chaqiriladi - sessiya hisoblagichini boshlaydi.
   Future<void> trackSessionStart() async {
@@ -37,7 +43,7 @@ class AnalyticsService {
     }
     await prefs.setString(_kLastOpenDateKey, DateTime.now().toIso8601String());
 
-    _sendToServer('session_start', {});
+    await _analytics?.logEvent(name: 'session_start');
   }
 
   /// Ilova background'ga ketganda yoki yopilganda chaqiriladi.
@@ -49,7 +55,10 @@ class AnalyticsService {
     final totalSeconds = (prefs.getInt(_kTotalPlayTimeSecondsKey) ?? 0) + duration.inSeconds;
     await prefs.setInt(_kTotalPlayTimeSecondsKey, totalSeconds);
 
-    _sendToServer('session_end', {'duration_seconds': duration.inSeconds});
+    await _analytics?.logEvent(
+      name: 'session_end',
+      parameters: {'duration_seconds': duration.inSeconds},
+    );
     _sessionStartTime = null;
   }
 
@@ -59,10 +68,13 @@ class AnalyticsService {
     final count = (prefs.getInt(_kLevelsCompletedKey) ?? 0) + 1;
     await prefs.setInt(_kLevelsCompletedKey, count);
 
-    _sendToServer('level_completed', {
-      'level': levelNumber,
-      'alphabet': alphabetKey,
-    });
+    await _analytics?.logEvent(
+      name: 'level_completed',
+      parameters: {
+        'level': levelNumber,
+        'alphabet': alphabetKey,
+      },
+    );
   }
 
   /// Statistika ekranida foydalanuvchiga o'zining faolligini ko'rsatish uchun.
@@ -75,17 +87,5 @@ class AnalyticsService {
       'firstOpenDate': prefs.getString(_kFirstOpenDateKey),
       'lastOpenDate': prefs.getString(_kLastOpenDateKey),
     };
-  }
-
-  /// TODO: Bu yerga serverga yuborish mantiqini qo'shing, masalan:
-  ///
-  /// final response = await http.post(
-  ///   Uri.parse('https://your-server.com/api/events'),
-  ///   body: jsonEncode({'event': eventName, 'data': data, 'timestamp': DateTime.now().toIso8601String()}),
-  /// );
-  ///
-  /// Hozircha hech narsa qilmaydi - faqat kelajak uchun joy.
-  void _sendToServer(String eventName, Map<String, dynamic> data) {
-    // Hozircha bo'sh - internet/server tayyor bo'lganda to'ldiriladi.
   }
 }

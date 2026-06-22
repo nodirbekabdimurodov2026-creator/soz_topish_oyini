@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,17 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Firebase'ni ishga tushiramiz - agar google-services.json fayli
+  // android/app/ ichida bo'lmasa, bu xato beradi, shuning uchun
+  // try-catch bilan o'raymiz (ilova Firebase'siz ham ishlayversin).
+  try {
+    await Firebase.initializeApp();
+    AnalyticsService.instance.attachFirebaseAnalytics(FirebaseAnalytics.instance);
+  } catch (e) {
+    // Firebase hali sozlanmagan bo'lsa, ilova baribir ishlayveradi -
+    // faqat statistika serverga yuborilmaydi, lokal saqlanishda davom etadi.
+  }
 
   // Reklama xizmatini fonda ishga tushiramiz - bu UI'ni bloklamasligi
   // uchun await qilinmaydi, lekin chaqirish darrov amalga oshiriladi.
@@ -46,8 +59,6 @@ class _SozTopishAppState extends State<SozTopishApp> with WidgetsBindingObserver
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Foydalanuvchi ilovani fon rejimiga o'tkazganda yoki yopganda
-    // o'ynagan vaqtini yakunlab, lokal statistikaga yozamiz.
     if (state == AppLifecycleState.paused || state == AppLifecycleState.detached) {
       AnalyticsService.instance.trackSessionEnd();
     } else if (state == AppLifecycleState.resumed) {

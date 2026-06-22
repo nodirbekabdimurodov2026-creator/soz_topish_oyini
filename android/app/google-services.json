@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "779209698122",
+    "project_id": "so-zni",
+    "storage_bucket": "so-zni.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779209698122:android:9daef549a687cf55afefb3",
+        "android_client_info": {
+          "package_name": "com.nimaga.sozTopish.soz_topish_new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADqnSQnm1CpANnPSdJCFzQaCZksvU9a_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
