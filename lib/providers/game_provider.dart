@@ -9,6 +9,7 @@ import '../models/daily_reward_state.dart';
 import '../models/level_model.dart';
 import '../models/level_progress.dart';
 import '../services/ad_service.dart';
+import '../services/analytics_service.dart';
 
 /// O'yinning markaziy holat boshqaruvchisi (Provider/ChangeNotifier asosida).
 ///
@@ -316,6 +317,7 @@ class GameProvider extends ChangeNotifier {
         _addCoins(20); // level tugatish bonusi
         _lastMessage = "Ajoyib! Daraja yakunlandi 🎉";
         AdService.instance.notifyLevelCompleted();
+        AnalyticsService.instance.trackLevelCompleted(level.levelNumber, level.alphabetKey);
       }
     } else if (alreadyFound) {
       _isLastWordCorrect = false;
@@ -425,6 +427,7 @@ class GameProvider extends ChangeNotifier {
     if (isLevelComplete) {
       _unlockNextLevel();
       AdService.instance.notifyLevelCompleted();
+      AnalyticsService.instance.trackLevelCompleted(level.levelNumber, level.alphabetKey);
     }
 
     notifyListeners();

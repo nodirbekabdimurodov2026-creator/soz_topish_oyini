@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'providers/game_provider.dart';
 import 'screens/level_select_screen.dart';
 import 'services/ad_service.dart';
+import 'services/analytics_service.dart';
 import 'theme/app_theme.dart';
 
 void main() async {
@@ -18,19 +19,48 @@ void main() async {
   // Reklama xizmatini fonda ishga tushiramiz - bu UI'ni bloklamasligi
   // uchun await qilinmaydi, lekin chaqirish darrov amalga oshiriladi.
   AdService.instance.initialize();
+  AnalyticsService.instance.trackSessionStart();
 
   runApp(const SozTopishApp());
 }
 
-class SozTopishApp extends StatelessWidget {
+class SozTopishApp extends StatefulWidget {
   const SozTopishApp({super.key});
+
+  @override
+  State<SozTopishApp> createState() => _SozTopishAppState();
+}
+
+class _SozTopishAppState extends State<SozTopishApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Foydalanuvchi ilovani fon rejimiga o'tkazganda yoki yopganda
+    // o'ynagan vaqtini yakunlab, lokal statistikaga yozamiz.
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.detached) {
+      AnalyticsService.instance.trackSessionEnd();
+    } else if (state == AppLifecycleState.resumed) {
+      AnalyticsService.instance.trackSessionStart();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => GameProvider(),
       child: MaterialApp(
-        title: "So'z Bog'i",
+        title: "So'zni Top",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,

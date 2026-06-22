@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="soz_topish_new"
+        android:label="So'zni Top"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data

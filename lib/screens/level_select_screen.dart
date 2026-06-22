@@ -71,7 +71,7 @@ class _LevelSelectScreenState extends State<LevelSelectScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("So'z Topish", style: AppTypography.display(size: 24)),
+                    Text("So'zni Top", style: AppTypography.display(size: 24)),
                     const SizedBox(height: 2),
                     Text(
                       "Lug'atingizni sinab ko'ring",

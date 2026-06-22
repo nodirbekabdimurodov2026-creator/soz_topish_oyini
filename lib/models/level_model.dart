@@ -64,12 +64,15 @@ class LevelModel {
   }
 
   /// Daraja raqamiga qarab, daraja tugatish uchun zarur bo'lgan so'zlar
-  /// sonini progressiv tarzda hisoblaydi. Boshida juda yengil (2 ta so'z),
-  /// 1-15 darajalarda asta-sekin ko'tariladi, 16-darajadan keyin esa
-  /// barcha so'zlar talab qilinadi (to'liq qiyinlik).
+  /// sonini progressiv tarzda hisoblaydi. 1-daraja atigi 1 ta so'z bilan
+  /// tugaydi (darrov g'alaba hissi), 2-daraja 2 ta so'z, undan keyin
+  /// asta-sekin ko'tarilib, 16-darajadan boshlab barcha so'zlar talab
+  /// qilinadi (to'liq qiyinlik).
   static int _progressiveThreshold(int levelNumber, int totalWords) {
-    if (totalWords <= 2) return totalWords;
-    if (levelNumber <= 3) return 2;
+    if (totalWords <= 1) return totalWords;
+    if (levelNumber == 1) return 1;
+    if (levelNumber == 2) return 2;
+    if (levelNumber <= 5) return totalWords < 3 ? totalWords : 3;
     if (levelNumber <= 8) return (totalWords * 0.4).ceil().clamp(2, totalWords);
     if (levelNumber <= 15) return (totalWords * 0.6).ceil().clamp(2, totalWords);
     return totalWords;
