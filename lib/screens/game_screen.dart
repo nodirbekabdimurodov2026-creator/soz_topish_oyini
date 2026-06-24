@@ -71,20 +71,15 @@ class _GameScreenState extends State<GameScreen>
                   children: [
                     _buildHeader(context, game, level),
                     const SizedBox(height: AppSpacing.sm),
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-                        child: SingleChildScrollView(
-                          child: WordGridPanel(
-                            allWords: level.validWords,
-                            foundWords: foundWords,
-                          ),
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                      child: WordGridPanel(
+                        allWords: level.validWords,
+                        foundWords: foundWords,
+                        requiredCount: level.completionThreshold,
                       ),
                     ),
                     Expanded(
-                      flex: 5,
                       child: _buildLetterCircle(context, game, level),
                     ),
                     _buildHintButton(context, game),

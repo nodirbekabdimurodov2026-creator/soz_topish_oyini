@@ -4,14 +4,23 @@ import '../theme/app_theme.dart';
 /// Topilishi kerak bo'lgan so'zlar uchun krossvord-uslubidagi katakchalar
 /// panelini chizadi. So'z topilganda mos katakchalar harflarga to'ladi,
 /// topilmagan bo'lsa bo'sh (faqat chiziq) ko'rinishda qoladi.
+///
+/// MUHIM: faqat [requiredCount] tagacha eng qisqa so'zlar ko'rsatiladi -
+/// qolgan "bonus" so'zlar (agar level.validWords ko'proq bo'lsa) bu
+/// panelda ko'rsatilmaydi, chunki ular daraja tugashi uchun shart emas.
+/// Bu birinchi darajalarda 1-2 ta katak qatori bilan boshlanishini va
+/// foydalanuvchini ko'p sonli bo'sh kataklar bilan cho'chitmasligini
+/// ta'minlaydi.
 class WordGridPanel extends StatelessWidget {
   final List<String> allWords;
   final List<String> foundWords;
+  final int requiredCount;
 
   const WordGridPanel({
     super.key,
     required this.allWords,
     required this.foundWords,
+    required this.requiredCount,
   });
 
   @override
@@ -19,11 +28,26 @@ class WordGridPanel extends StatelessWidget {
     final sorted = [...allWords]
       ..sort((a, b) => a.length.compareTo(b.length));
 
+    // Faqat talab qilingan sondagi (eng qisqa) so'zlarni ko'rsatamiz.
+    // Agar foydalanuvchi shu sonni topgandan keyin ham qo'shimcha
+    // (bonus) so'z topgan bo'lsa, ularni ham ko'rsatamiz - shunda
+    // allaqachon topilgan bonus so'zlar yo'qolib qolmaydi.
+    final visibleWords = <String>{};
+    for (final w in sorted.take(requiredCount)) {
+      visibleWords.add(w);
+    }
+    for (final foundUpper in foundWords) {
+      final match = allWords.where((x) => x.toUpperCase() == foundUpper);
+      if (match.isNotEmpty) visibleWords.add(match.first);
+    }
+    final displayList = visibleWords.toList()
+      ..sort((a, b) => a.length.compareTo(b.length));
+
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: AppSpacing.sm,
       runSpacing: AppSpacing.sm,
-      children: sorted.map((word) {
+      children: displayList.map((word) {
         final isFound = foundWords.contains(word.toUpperCase());
         return _WordSlot(word: word, isFound: isFound);
       }).toList(),
